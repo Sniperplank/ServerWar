@@ -1,20 +1,19 @@
-const fs = require('fs');
+const { EmbedBuilder } = require('discord.js');
 
 module.exports = {
-  name: 'help',
-  description: 'List all available commands.',
-  execute(interaction) {
-    let str = '';
-    const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-
-    for (const file of commandFiles) {
-      const command = require(`./${file}`);
-      str += `Name: ${command.name}, Description: ${command.description} \n`;
-    }
-
-    return void interaction.reply({
-      content: str,
-      ephemeral: true,
-    });
-  },
+    name: 'help',
+    description: 'Help on how to participate in the war.',
+    execute(interaction) {
+        let color = interaction.member.displayHexColor;
+        if (color == '#000000') color = '#00245e';
+        const newEmbed = new EmbedBuilder()
+            .setColor(color)
+            .setTitle(`Help`)
+            .addFields(
+                { name: 'Participating', value: `Use /joinwar to participate in the war. A profile will be created for you.` },
+                { name: 'Goal', value: `Eliminate other players to win money and prizes.` },
+                { name: 'Commands', value: `Use /commands to see a list of all available commands` }
+            )
+        interaction.reply({ embeds: [newEmbed] })
+    },
 };
