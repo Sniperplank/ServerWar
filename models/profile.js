@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const profile = new mongoose.Schema({
-    userID: { type: String, require: true, unique: true},
+    userID: { type: String, require: true, unique: false},
     serverID: { type: String, require: true},
     name: { type: String },
     health: { type: Number, default: 100 },

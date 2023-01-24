@@ -11,7 +11,7 @@ module.exports = {
       required: true,
     },
   ],
-  execute(interaction, client) {
+  execute(interaction, client, profileData) {
     const member = interaction.options.getUser('user');
 
     if (!member) {

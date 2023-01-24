@@ -4,7 +4,7 @@ const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fet
 module.exports = {
   name: 'quote',
   description: 'Send a random quote!',
-  async execute(interaction, player) {
+  async execute(interaction, client, profileData) {
     let response = await fetch('https://self-boost-quotes-api.vercel.app/')
     let data = await response.json()
     const quoteEmbed = new EmbedBuilder()

@@ -3,7 +3,7 @@ const { EmbedBuilder } = require('discord.js');
 module.exports = {
     name: 'help',
     description: 'Help on how to participate in the war.',
-    execute(interaction) {
+    execute(interaction, client, profileData) {
         let color = interaction.member.displayHexColor;
         if (color == '#000000') color = '#00245e';
         const newEmbed = new EmbedBuilder()

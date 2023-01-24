@@ -9,7 +9,7 @@ module.exports = {
       required: true,
     },
   ],
-  async execute(interaction) {
+  async execute(interaction, client, profileData) {
     const deleteCount = interaction.options.get('num').value;
 
     if (!deleteCount || deleteCount < 2 || deleteCount > 100) {

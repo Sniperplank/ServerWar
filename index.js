@@ -1,9 +1,12 @@
 require('dotenv').config()
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
+const mongoose = require('mongoose');
 const fs = require('fs');
 const Discord = require('discord.js');
 const Client = require('./client/Client');
 const { EmbedBuilder } = require('discord.js');
+const Profile = require('./models/profile')
+
 
 const client = new Client();
 client.commands = new Discord.Collection();
@@ -40,15 +43,22 @@ client.on('messageCreate', async message => {
 
 client.on('interactionCreate', async interaction => {
     const command = client.commands.get(interaction.commandName.toLowerCase());
+    let profileData = await Profile.findOne({ userID: interaction.user.id, serverID: interaction.guild.id })
 
     try {
-        command.execute(interaction, client);
+        command.execute(interaction, client, profileData);
     } catch (error) {
         console.error(error);
         interaction.followUp({
             content: 'There was an error trying to execute that command!',
         });
     }
+});
+
+mongoose.connect(process.env.DB_CONNECTION).then(() => {
+    console.log("Connected to the database!");
+}).catch((err) => {
+    console.log(err);
 });
 
 client.login(process.env.TOKEN);
