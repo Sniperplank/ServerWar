@@ -1,8 +1,8 @@
 const { EmbedBuilder } = require('discord.js');
 
 module.exports = {
-    name: 'money',
-    description: "Show how much money you have",
+    name: 'health',
+    description: "Show how much health you have",
     async execute(interaction, client, profileData) {
         if (!profileData) return interaction.reply(`You do not have an active profile! Use /joinwar to make one`);
 
@@ -12,7 +12,7 @@ module.exports = {
             .setColor(color)
             .setTitle(`${interaction.user.username}`)
             .addFields(
-                { name: 'Money', value: `$${profileData.money}` }
+                { name: 'Health', value: `$${profileData.health} / 100` }
             )
 
         interaction.reply({ embeds: [newEmbed] });
