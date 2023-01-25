@@ -13,6 +13,7 @@ module.exports = {
                         userID: interaction.user.id,
                         serverID: interaction.guild.id,
                         name: interaction.user.username,
+                        serverName: interaction.guild.name,
                         health: 100,
                         shield: 0,
                         money: 1000,
